@@ -6,39 +6,62 @@ package com.apmanager.domain.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 /**
  *
  * @author luis
  */
+@javax.persistence.Entity
 public class Product implements Entity {
 
+    @Id
+    @SequenceGenerator(name = "product-seq", sequenceName = "product_id_seq",
+    allocationSize = 1)
+    @GeneratedValue(generator = "product-seq")
     private Long id;
 
     private String name;
 
+    @Transient
     private ProductBrand brand;
 
+    @Transient
     private Date registerDate;
 
+    @Transient
     private String description;
 
+    @Transient
     private List<Appliance> appliances;
 
+    @Transient
     private String code;
 
+    @Transient
     private String barcode;
 
+    @Transient
     private Integer maxDiscountPercent;
 
+    @Transient
     private Float sellPrice;
 
+    @Transient
     private Float purchuasePrice;
 
+    @Transient
     private Integer quantity;
 
+    @ManyToOne(fetch= FetchType.LAZY)
     private Shelf shelf;
 
+    @Override
     public Long getId() {
         return id;
     }
